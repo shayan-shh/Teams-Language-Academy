@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<main>
+    <header class="site-header section-padding d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-10 col-12" dir="rtl">
+                    <h1>
+                        <span class=" text-primary">   ساز مورد علاقت و </span>
+                        <span class="text-dark">اینجا میتونی پیدا کنی </span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="products section-padding " dir="rtl">
+        <div class="container">
+            <div class="row">
+                {% for item in courses %}
+                {% if item.is_sale  %}
+
+                <div class="col-lg-4 col-12 mb-3" >
+                    <div class="product-thumb">
+                        <a href="{% url 'course' item.id %}">
+                            <img src="{{item.picture.url}}" class="img-fluid product-image" alt="">
+                        </a>
+
+                        <div class="product-top d-flex">
+                            <span class="product-alert me-auto">تخفیف ویژه</span>
+                        </div>
+
+                        <div class="product-info" style="display: flex; justify-content: space-between; align-items: center;">
+                                <h5 class="product-title mb-0">
+                                    <a href="{% url 'course' item.id %}" class="product-title-link">{{item.name}}</a>
+                                </h5>
+
+                                <small class="product-price text-muted mt-1">{{item.sale_price | intcomma}} تومان</small>
+                               
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+
+                <div class="col-lg-4 col-12 mb-3" >
+                    <div class="product-thumb" >
+                        <a href="{% url 'course' item.id %}">
+                            <img src="{{item.picture.url}}" class="img-fluid product-image" alt="" style="border: 2px black;">
+                        </a>
+
+
+                        <div class="product-info" style="display: flex; justify-content: space-between; align-items: center;">
+                                <h5 class="product-title mb-0">
+                                    <a href="{% url 'course' item.id %}" class="product-title-link">{{item.name}}</a>
+                                </h5>
+
+                                <small class="product-price text-muted mt-1">{{item.price | intcomma}} تومان</small>
+                                                       
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
+
+

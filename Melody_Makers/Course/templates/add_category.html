@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+          <center>
+            <div class="col-lg-10 col-12 " dir="rtl">
+              <h1>
+                  <span class=" text-dark"> افزودن </span>
+                  <span class="text-primary"> دوره آموزشی جدید</span>
+              </h1>
+          </div>
+          </center>
+        </div>
+    </div>
+  </header>
+ <section class="" dir="rtl">
+    <div class="container py-5 form-container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <form class="w-70"  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="form-group my-4">
+                عنوان دسته بندی: {{ form.name }}
+            </div>
+
+            <button type="submit" class="btn btn-outline-dark">افزودن </button>
+        </form>   
+        </div>
+    </div>
+  </section>
+
+  <style>
+    /* Custom CSS to set max width and center the form */
+    .form-container {
+        max-width: 800px;  /* Set the desired width */
+        margin: 0 auto;  /* Center the form */
+    }
+</style>
+
+{% endblock content %}
+
+

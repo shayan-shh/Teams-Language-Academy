@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+
+            <center>
+                <div class="col-lg-10 col-12" dir="rtl">
+                    <h1>
+                        <span class="text-dark">اینجا میتونی   </span>
+                        <span class=" text-primary">   پرداخت کنی</span>
+                    </h1>
+                </div>
+            </center>
+        </div>
+    </div>
+</header>
+ <section class=" h-custom" dir="rtl">
+    <div class="container py-5 ">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-7">
+         
+                <div class="card">
+                    <div class="card-header">
+                    مرور خرید شما
+                    </div>
+                    <div class="card-body">
+                    {% for course in cart_course %}
+                        <p>عنوان دوره: {{course.name}}</p>
+                        {% if course.is_sale %}
+                          <p>قیمت: {{course.sale_price | intcomma}} </p> 
+                        {% else %}
+                        <p>قیمت: {{course.price | intcomma}}</p> 
+                        {% endif %}
+                        <p>طول دوره:  {{course.length}}</p>
+                        <p> روز های: {{course.days}}</p>
+                        
+                        {% endfor %}
+                        <h5>جمع خرید: {{total | intcomma}}</h3>
+                        <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark mt-3">به روزرسانی سبد خرید</a>
+                        <a href="{% url 'billing_info' %}" class="btn btn-success mt-3">ادامه پرداخت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+

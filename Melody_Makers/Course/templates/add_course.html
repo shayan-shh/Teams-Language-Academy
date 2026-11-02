@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+          <center>
+            <div class="col-lg-10 col-12 " dir="rtl">
+              <h1>
+                  <span class=" text-dark"> افزودن </span>
+                  <span class="text-primary"> دوره آموزشی جدید</span>
+              </h1>
+          </div>
+          </center>
+        </div>
+    </div>
+  </header>
+ <section class="py-5" dir="rtl">
+    <div class="container   form-container">
+        <div class="row d-flex justify-content-center align-items-center ">
+
+            <form class="w-70"  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="form-group my-4">
+                عنوان دوره: {{ form.name }}
+            </div>
+            <div class="form-group my-4">
+                توضیخات {{ form.description }}
+            </div>
+            <div class="form-group my-4">
+                قیمت {{ form.price }}
+            </div>
+            <div class="form-group my-4">
+                دسته بندی:  {{ form.category }}
+            </div>
+            <div class="form-group my-4">
+                بارگزاری تصویر: {{ form.picture }}
+            </div>
+            <div class="form-check float-end"> 
+                آیا دوره دارای تخفیف است؟ {{ form.is_sale }} 
+            </div><br>
+            <div class="form-group my-4">
+                قیمت با تخفیف {{ form.sale_price}}
+            </div>
+            <div class="form-group my-4">
+                مدت زمان دوره:  {{ form.length }}
+            </div>
+            <div class="form-group my-4">
+                روز ها برگزاری:  {{ form.days }}
+            </div>
+            <div class="form-group my-4">
+                مربی دوره : {{ form.teacher_name }}
+            </div>
+            <button type="submit" class="btn btn-outline-dark">افزودن </button>
+        </form>   
+        </div>
+    </div>
+  </section>
+
+  <style>
+    /* Custom CSS to set max width and center the form */
+    .form-container {
+        max-width: 800px;  /* Set the desired width */
+        margin: 10px auto;  /* Center the form */
+    }
+</style>
+
+{% endblock content %}
+
+

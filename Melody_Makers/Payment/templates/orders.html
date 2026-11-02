@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+  
+            <center>
+              <div class="col-lg-10 col-12" dir="rtl">
+                <h1>
+                    <span class=" text-dark">   اطلاعات خرید    </span>
+                    <span class="text-primary">{{order.full_name}} </span>
+                </h1>
+            </div>
+            </center>
+        </div>
+    </div>
+  </header>
+ <section class="h-100 h-custom"  dir="rtl">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-7 col-sm">
+                <div class="card">
+                    <div class="card-header">
+                      سفارش {{order.id}}  -  {{order.amount_paid | intcomma}} تومان
+                    </div>
+                    <div class="card-body">
+                        <p>ایمیل: {{order.email}}</p>
+                        <p>تاریخ خرید: {{order.date_ordered}}</p>
+                        <p>نام و نام خانوادگی: {{order.full_name}}</p><br> 
+                        <strong> آموزش ها:</strong>
+                        {% for item in items %}
+                        <p> نام دوره: {{ item.course }} <br>قیمت: {{item.price | intcomma}}</p>
+                        
+                        {% endfor %}
+                        
+                      
+                    </div>
+                  </div>
+                  <a class="btn btn-outline-dark flex-shrink-0  mt-3" href="{% url 'item_list' %}">
+                    بازشگت  
+                    <i class="bi bi-arrow-left-circle"></i>
+                   </a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+

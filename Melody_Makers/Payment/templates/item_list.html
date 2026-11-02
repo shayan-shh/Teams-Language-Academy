@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+  <div class="container">
+      <div class="row">
+
+          <center>
+            <div class="col-lg-10 col-12" dir="rtl">
+              <h1>
+                  <span class=" text-primary">   اطلاعات خرید های </span>
+                  <span class="text-dark">کاربران </span>
+              </h1>
+          </div>
+          </center>
+      </div>
+  </div>
+</header>
+ <section class="py-5" dir="rtl">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-8">
+                <center><h3 class="mb-5">لیست خرید ها</h3></center>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                          <th scope="col">شماره سفارش </th>
+                          <!-- <th scope="col">نام سفارش </th> -->
+                          <th scope="col">قیمت</th>
+                          <th scope="col">ایمیل</th>
+                          <th scope="col">تاریخ سفارش</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    {% for item in orders %}
+                        <tr>
+                          <td><a href="{% url 'orders' item.id %}">{{ item.id }}</a></td>
+                          <!-- <td>{{item.name}}</td> -->
+                          <td>{{ item.amount_paid | intcomma }}</td>
+                          <td>{{ item.email }}</td>
+                          <td>{{ item.date_ordered }}</td>
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+                  </table>
+                  <a class="btn btn-outline-dark flex-shrink-0  mt-3" href="{% url 'user_list' %}">
+                    بازشگت  
+                    <i class="bi bi-arrow-left-circle"></i>
+                   </a>
+            </div>
+            
+        </div>
+    </div>
+  </section>
+<br><br><br><br><br><br>
+{% endblock content %}
+
+

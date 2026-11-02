@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <strong><span>موسیقی</span> سازان</strong>
+        </a>
+        <a class="navbar-brand mx-2" href="{% url 'search' %}">
+            <i class="bi bi-search"></i>
+        </a>
+        
+
+        <!-- Collapsible Navbar Menu for other links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">خانه</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">درباره ما</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">دوره ها</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'courses' %}">همه دوره ها</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category_summary' %}">دسته بندی ها</a></li>
+                    </ul>
+                </li>
+
+                {% if user.is_superuser %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="{% url 'update_user' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">مدیریت</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'item_list' %}">لیست خرید ها</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_list' %}">لیست کاربر ها</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_course' %}">افزودن دوره جدید</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_category' %}">افزودن دسته بندی جدید</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <!-- Aligning the user and cart icon to the right -->
+        <div class="d-flex align-items-center ms-auto">
+            {% if user.is_authenticated %}
+            <p style="margin-top: 12px;">{{user.username}}</p>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle bi-person custom-icon" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                       
+                        
+                        <li><a class="dropdown-item" href="">{{user.username}}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'my_course' %}">دوره های من</a></li>
+                        <li><a class="dropdown-item" href="{% url 'update_user' %}">ویرایش پروفایل</a></li>
+        
+                        <li><a class="dropdown-item" href="{% url 'update_info' %}"> اطلاعات تکمیلی</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">خروج از حساب</a></li>
+                    </ul>
+                </div>
+                
+            {% else %}
+                <!-- Show Login if not authenticated -->
+                <a href="{% url 'login' %}" class="bi-person custom-icon me-3"></a>
+               
+            {% endif %}
+            
+            <!-- Cart Icon -->
+            <form action="d-flex">
+                {% csrf_token %}
+                <a href="{% url 'cart_summary' %}" class="bi-bag custom-icon">
+                    <span class="badge bg-white text-dark rounded-pill" id="cart_quantity">{{ cart|length }}</span>
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>

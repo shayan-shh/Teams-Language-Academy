@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{%block content %}
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-10 col-12" dir="rtl">
+                <h1>
+                    <span class=" text-primary">   {{course}}</span>
+                    <span class="text-dark">اینجا میتونی پیدا کنی </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Product section-->
+<section class="py-5" dir="rtl">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ course.picture.url }}" alt="..." /></div>
+            <div class="col-md-6">
+                <div class="small mb-1 text-primary">{{course.category}}</div>
+                <h1 class="display-5 fw-bolder">{{course.name}}</h1>
+                <div class="fs-5 mb-5">
+                    {% if course.is_sale %}
+                    <small class="text-decoration-line-through text-secondary d-block"><i class="bi bi-cash-coin ml-4"></i> {{course.price |intcomma }} تومان</small>
+
+                    <small class="text-primary d-block"><i class="bi bi-cash-coin ml-4"></i>{{course.sale_price | intcomma}}تومان</small>
+                    {% else %}
+                    <small>{{course.price | intcomma }} تومان</small>
+                    {% endif %}
+                </div>
+
+                
+                <div class="product-description">
+
+                    <strong class="d-block mt-4 mb-2">توضیحات</strong>
+                    <p class="lead mb-2">{{course.description}}</p>
+                    <strong class="d-block mt-1 mb-2" >طول دوره </strong>
+                    <p class="lead mb-2">{{course.length}}</p>
+
+                    <strong class="d-block mt-1 mb-2" >روز های برگزاری دوره </strong>
+                    <p class="lead mb-5">{{course.days}}</p>
+                </div>
+                <div class="d-inline-flex ">
+                    {% if user.is_superuser %}
+                    <button type="submit" class="btn  flex-shrink-0 px-3">
+                        <a class="btn btn-outline-primary flex-shrink-0" href="{% url 'edit_course' course.id %}">
+                          ویرایش  
+                          <i class="bi bi-pencil-square px-1"></i>
+                         </a>
+                    </button>
+                    <button type="submit" class="btn  flex-shrink-0 " >
+                        <a class="btn btn-outline-danger flex-shrink-0  m1" href="{% url 'delete_course'  course.id %}">
+                          حذف  
+                          <i class="bi bi-trash-fill px-1"></i>
+                         </a>
+                    </button>
+                    <button type="button" class="btn  flex-shrink-0 " >
+                        <a class="btn btn-outline-dark flex-shrink-0  m-1" href="{% url 'home' %}">
+                            بازگشت  
+                            <i class="bi bi-arrow-left-circle"></i>
+                        </a>
+                    </button>
+                    {% else %}
+                    <button class="btn btn-outline-dark flex-shrink-0 m-1" type="button" value="{{course.id}}" id="add-cart">
+                        خرید دوره
+                       <i class="bi-cart-fill me-1"></i>
+                   </button>
+                    <a class="btn btn-outline-dark flex-shrink-0  m-1" href="{% url 'courses' %}">
+                    بازگشت  
+                    <i class="bi bi-arrow-left-circle"></i>
+                    </a>
+                    {% endif %}
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="related-product section-padding border-top">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12">
+                <h3 class="mb-5">آموزش های مشابه</h3>
+            </div>
+
+            {% for item in similar_courses %}
+            {% if item.is_sale  %}
+
+            <div class="col-lg-4 col-12 mb-3" >
+                <div class="product-thumb">
+                    <a href="{% url 'course' item.id %}">
+                        <img src="{{item.picture.url}}" class="img-fluid product-image" alt="">
+                    </a>
+
+                    <div class="product-top d-flex">
+                        <span class="product-alert me-auto">تخفیف ویژه</span>
+                    </div>
+
+                    <div class="product-info" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h5 class="product-title mb-0">
+                                <a href="{% url 'course' item.id %}" class="product-title-link">{{item.name}}</a>
+                            </h5>
+
+                            <small class="product-price text-muted mt-1">{{item.sale_price | intcomma}} تومان</small>
+                           
+                    </div>
+                </div>
+            </div>
+            {% else %}
+
+            <div class="col-lg-4 col-12 mb-3" >
+                <div class="product-thumb" >
+                    <a href="{% url 'course' item.id %}">
+                        <img src="{{item.picture.url}}" class="img-fluid product-image" alt="" style="border: 2px black;">
+                    </a>
+
+
+                    <div class="product-info" style="display: flex; justify-content: space-between; align-items: center;">
+                            <h5 class="product-title mb-0">
+                                <a href="{% url 'course' item.id %}" class="product-title-link">{{item.name}}</a>
+                            </h5>
+
+                            <small class="product-price text-muted mt-1">{{item.price | intcomma}} تومان</small>
+                                                   
+                    </div>
+                </div>
+            </div>
+
+
+
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<script>
+    $(document).on('click', '#add-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url: "{% url 'cart_add' %}",
+            data: {
+                course_id: $('#add-cart').val(),
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                action: 'post',
+            },
+
+            success: function(json){
+                // console.log(json)
+                document.getElementById('cart_quantity').textContent = json.qty
+                location.reload();
+            },
+            
+        })
+    })
+</script>
+{% endblock content  %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+</header>
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+  <div class="container">
+      <div class="row">
+        <center>
+          <div class="col-lg-10 col-12 " dir="rtl">
+            <h1>
+                <span class=" text-primary"> {{user.first_name}} {{user.last_name}}</span><br>
+                <span class="text-dark"> لیست خرید های کابر شماره ی {{user.id}}</span>
+            </h1>
+        </div>
+        </center>
+      </div>
+  </div>
+</header>
+ <section class="py-5" dir="rtl">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+            <hr>
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                      <th scope="col"> شناسه دوره </th>
+                      <th scope="col">  نام دوره </th>
+                      <th scope="col">قیمت   </th>
+                      <th scope="col">دسته بندی </th>
+                      <th scope="col">مدت زمان دوره  </th>
+                      <th scope="col">روز های برگزاری</th>
+                      <th scope="col">  مربی دوره</th>
+                      <th scope="col">  تاریخ خرید دوره</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                {% for item in courses %}
+                    <tr>
+                      <td>{{ item.course.id }}</td>
+                      <td>  {{item.course.name}}</td>
+                      <td>{{ item.course.price | intcomma }}</td>
+                      <td>{{ item.course.category }}</td>
+                      <td>{{ item.course.length }}</td>
+                      <td>{{ item.course.days }}</td>
+                      <td>{{ item.course.teacher_name }}</td>
+                      <td>{{ item.order.date_ordered }}</td>
+                    </tr>
+                {% endfor %}
+                  </tbody>
+              </table>
+            </div>
+            <a class="btn btn-outline-dark flex-shrink-0  mt-3" href="{% url 'user_list' %}">
+              بازگشت  
+              <i class="bi bi-arrow-left-circle"></i>
+             </a>
+    </div>
+  </section>
+
+{% endblock content %}
+
+

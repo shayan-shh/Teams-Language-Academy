@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{%block content %}
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+  <div class="container">
+      <div class="row">
+
+          <div class="col-lg-10 col-12" dir="rtl">
+              <h1>
+                  <span class=" text-primary"> دسته بندی ها و</span>
+                  <span class="text-dark">اینجا میتونی پیدا کنی </span>
+              </h1>
+          </div>
+      </div>
+  </div>
+</header>
+
+
+<section  dir="rtl">
+  <div class="text-center container py-5">
+    <h4 class="mt-4 mb-5 text-primary"><strong>دسته بندی های دوره ها</strong></h4>
+
+    <div class="row">
+        {% for cat in category %}
+      <div class="col-lg-4 col-md-12 mb-4">
+        <div class="card" style="background-color: #F0F8FF;">
+          <div class="card-body ">
+            {% if user.is_superuser %}
+            <h5 class="card-title mb-3 ">{{cat.name}}</h5>
+            <button type="submit" class="btn  flex-shrink-0 ">
+                <a class="btn btn-primary flex-shrink-0" href="{% url 'edit_category' cat.id %}">
+                  ویرایش  
+                  <i class="bi bi-pencil-square"></i>
+                 </a>
+            </button>
+            <button type="submit" class="btn  flex-shrink-0 " >
+                <a class="btn btn-danger flex-shrink-0  " href="{% url 'delete_category'  cat.id %}">
+                  حذف  
+                  <i class="bi bi-trash-fill"></i>
+                 </a>
+            </button>
+            <button type="submit" class="btn  flex-shrink-0">
+                <a class="btn btn-outline-dark flex-shrink-0  " href="{% url 'category' cat.name %}">
+                  دوره ها  
+                  <i class="bi bi-arrow-left-circle"></i>
+                 </a>
+            </button>      
+            {% else %}
+
+            <button type="submit" class="btn  flex-shrink-0">
+              <a class="btn btn-outline-dark" href="{% url 'category' cat.name %}">
+                {{cat.name}}
+                <i class="bi bi-arrow-left-circle text-primary"></i>
+               </a>
+            </button>  
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+
+{% endblock %}

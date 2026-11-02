@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{%block content %}
+    
+        <main>            
+            <section class="slick-slideshow" >   
+                <div class="slick-custom" >
+                    <img src="../../static/images/slideshow/slide1.jpg" class="img-fluid " alt="">
+                    <div class="slick-bottom">
+                        <div class="container">
+                            <div class="row" >
+                                <div class="col-lg-6 col-10">
+                                    <h1 class="slick-title"> حضور اساتید مجرب در آموزشگاه موسیقی سازان </h1>
+
+                                
+                                    <a href="{% url 'about' %}" class="btn custom-btn">درباره ما بیشتر بدانید</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slick-custom">
+                    <img src="../../static/images/slideshow/tech2.webp" class="img-fluid" alt="">
+                    <div class="slick-bottom">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-10" >
+                                    <h1 class="slick-title"> کلاس های متنوع</h1>
+
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">برای همه سنین</p>
+
+                                    <a href="{% url 'courses' %}" class="btn custom-btn"> دوره های آموزش </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slick-custom">                  
+                    <img src="../../static/images/slideshow/two-business-partners-working-together-office-computer.jpeg" class="img-fluid" alt="">
+                    <div class="slick-bottom">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 col-10 " >
+                                    <h1 class="slick-title"> با ما همراه باشید</h1>
+
+                                    <p class="lead text-white mt-lg-3 mb-lg-5">اطلاعات تماس</p>
+
+                                    <a href="{% url 'category_summary'  %}" class="btn custom-btn"> دسته بندی های آموزشی</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section class="about section-padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h2 class="mb-5">  با ما در یادگیری <span> موسیقی </span> به سبک نو  همراه شوید</h2>
+                        </div>
+
+                        <div class="col-lg-2 col-12 mt-auto mb-auto" dir="ltr">
+                            <ul class="nav nav-pills mb-5 mx-auto justify-content-center align-items-center" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">مقدمه</button>
+                                </li>
+
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-youtube-tab" data-bs-toggle="pill" data-bs-target="#pills-youtube" type="button" role="tab" aria-controls="pills-youtube" aria-selected="true">مسیر یادگیری</button>
+                                </li>
+
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-skill-tab" data-bs-toggle="pill" data-bs-target="#pills-skill" type="button" role="tab" aria-controls="pills-skill" aria-selected="false">مهارت های ما</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-10 col-12">
+                            <div class="tab-content mt-2" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                                    <div class="row">
+                                        <div class="col-lg-7 col-12">
+                                            <img src="../../static/images/pim-chu-z6NZ76_UTDI-unsplash.jpeg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="col-lg-5 col-12" dir="rtl">
+                                            <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
+                                                <h4 class="mb-3">هر <span>نت </span> <br> موسیقی <span>داستانی </span> دارد</h4>
+
+                                                <p>هر نت موسیقی دارای ویژگی‌های خاصی است که آن را از دیگر نت‌ها متمایز می‌کند. این ویژگی‌ها شامل ارتفاع (Pitch)، طول مدت (Duration)، شدت صدا (Intensity)، و نوع صدا (Timbre) هستند که هر کدام بر نحوه شنیدن و درک نت تأثیر می‌گذارند. به عنوان مثال، نت‌های با ارتفاع بالا، صدای تیزتری دارند، در حالی که نت‌های با ارتفاع پایین صدای عمیق‌تری ایجاد می‌کنند.</p>
+                                                <p>این ویژگی‌ها به موسیقی‌دانان این امکان را می‌دهند که با ترکیب و تنظیم نت‌ها، احساسات و مفاهیم مختلفی را انتقال دهند.</p>
+                                                <div class=" mt-lg-auto mx-2">
+                                                    <a href="{% url 'about' %}" class="custom-link mb-2">
+                                                        درباره ما
+                                                        <i class="bi-arrow-right ms-1"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-youtube" role="tabpanel" aria-labelledby="pills-youtube-tab">
+
+                                    <div class="row">
+                                        <div class="col-lg-7 col-12">
+                                            <div class="ratio ratio-16x9">
+                                                <iframe src="https://www.youtube-nocookie.com/embed/f_7JqPDWhfw?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5 col-12" dir="rtl">
+                                            <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
+                                                <h4 class="mb-3">موسیقی آرامش روح است</h4>
+
+                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+
+                                                <p>متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز</p>
+
+
+                                                <div class="mt-2 mt-lg-auto">
+                                                    <a href="{% url 'courses' %}" class="custom-link mb-2">
+                                                        <i class="bi-arrow-right ms-1"></i>
+                                                        لسیت دوره ها
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-skill" role="tabpanel" aria-labelledby="pills-skill-tab">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-12">
+                                            <img src="../../static/images/cody-lannom-G95AReIh_Ko-unsplash.jpeg" class="img-fluid" alt="">
+                                        </div>
+
+                                        <div class="col-lg-5 col-12" dir="rtl">
+                                            <div class="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
+                                                <h4 class="mb-3">تضمین کیفیت یادگیری</h4>
+
+                                                <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</p>
+
+                                                <div class="skill-thumb mt-3">
+
+                                                    <strong>کادر مجرب</strong>
+                                                        <span class="float-end mx-3">90%</span>
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+                                                            </div>
+
+                                                    <strong> فضای دلنشین </strong>
+                                                        <span class="float-end mx-3">70%</span>
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
+                                                            </div>
+
+                                                    <strong>پتیبانی قوی</strong>
+                                                        <span class="float-end mx-3">80%</span>
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
+                                                            </div>
+                                                </div>
+                                                
+                                                <div class=" mt-lg-auto">
+                                                    <a href="{% url 'category_summary' %}" class="custom-link ">
+                                                        لیست دسته بندی ها
+                                                        <i class="bi-arrow-right ms-1"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="front-product">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-6 col-12">
+                            <img src="../../static/images/music.png" class="img-fluid" alt="">
+                        </div>
+
+                        <div class="col-lg-6 col-12" dir="rtl">
+                            <div class="px-5 py-5 py-lg-0">
+                                
+                                <h2 class="mb-4"><span>موسیقی</span>  زبان احساسات است</h2>
+
+                                <p class="lead mb-4">بدون کلمات، عواطف انسانی را به اشتراک می‌گذارد و قادر است ارتباطی جهانی میان افراد از فرهنگ‌های مختلف برقرار کند.</p>
+
+                                <a href="{% url 'courses' %}" class="custom-link">
+                                    لیست دورها
+                                    <i class="bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured-product section-padding" dir="rtl">
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-12 text-center">
+                            <h2 class="mb-5">دوره ها با تخفیف </h2>
+                        </div>
+                        {% for item in courses %}
+                        {% if item.is_sale  %}
+                        <div class="col-lg-4 col-12 mb-3" >
+                            <div class="product-thumb">
+                                <a href="{% url 'course' item.id %}">
+                                    <img src="{{item.picture.url}}" class="img-fluid product-image" alt="">
+                                </a>
+
+                                <div class="product-top d-flex">
+                                    <span class="product-alert me-auto">تخفیف ویژه</span>
+                                </div>
+
+                                <div class="product-info" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h5 class="product-title mb-0">
+                                            <a href="{% url 'course' item.id %}" class="product-title-link">{{item.name}}</a>
+                                        </h5>
+
+                                        <small class="product-price text-muted">{{item.sale_price | intcomma}} تومان</small>
+                                                               
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        
+                        
+                        {%endif%}
+                        {%endfor%}
+                        
+
+                        <div class="col-12 text-center">
+                            <a href="{% url 'courses' %}" class="view-all">بازدید از دوره ها</a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+{% endblock content %}

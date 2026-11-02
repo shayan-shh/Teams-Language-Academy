@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+          <center>
+            <div class="col-lg-10 col-12 " dir="rtl">
+              <h1>
+                  <span class=" text-dark"> ویرایش </span>
+                  <span class="text-primary"> دوره آموزشی </span>
+              </h1>
+          </div>
+          </center>
+        </div>
+    </div>
+</header>
+ <section dir="rtl" class="" >
+    <div class="container py-5 form-container">
+        <div class="row d-flex justify-content-center align-items-center  ">
+            <hr>
+
+            <form class="w-70"  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="form-group my-4">
+                عنوان دوره: {{ form.name }}
+            </div>
+            <div class="form-group my-4">
+                توضیخات {{ form.description }}
+            </div>
+            <div class="form-group my-4">
+                قیمت {{ form.price}}
+            </div>
+            <div class="form-group my-4">
+                دسته بندی:  {{ form.category }}
+            </div>
+            <div class="form-group my-4">
+                بارگزاری تصویر: {{ form.picture }}
+            </div>
+            <div class="form-check float-end"> 
+                آیا دوره دارای تخفیف است؟ {{ form.is_sale }} 
+            </div><br>
+            <div class="form-group my-4">
+                قیمت با تخفیف {{ form.sale_price}}
+            </div>
+            <div class="form-group my-4">
+                مدت زمان دوره:  {{ form.length }}
+            </div>
+            <div class="form-group my-4">
+                روز ها برگزاری:  {{ form.days }}
+            </div>
+            <div class="form-group my-4">
+                مربی دوره : {{ form.teacher_name }}
+            </div>
+            <button type="submit" class="btn btn-primary flex-shrink-0 m-1 px-3">
+                ویرایش 
+                <i class="bi bi-pencil-square"></i>
+            </button>
+            <button type="button" class="btn ">
+                <a class="btn btn-outline-dark flex-shrink-0  m-1" href="{% url 'category_summary' %}">
+                بازشگت  
+                <i class="bi bi-arrow-left-circle"></i>
+            </a></button>
+        </form>   
+        </div>
+    </div>
+  </section>
+
+  <style>
+    /* Custom CSS to set max width and center the form */
+    .form-container {
+        max-width: 800px;  /* Set the desired width */
+        margin: 0 auto;  /* Center the form */
+    }
+</style>
+<script>
+    // JavaScript to clear the sale price field when 'Is on Sale' checkbox is unchecked
+    const isSaleCheckbox = document.getElementById('id_is_sale');
+    const salePriceField = document.getElementById('id_sale_price');
+
+    // Initially check if the checkbox is unchecked and clear the sale price
+    if (!isSaleCheckbox.checked) {
+        salePriceField.value = ''; // Clear the sale price when not on sale
+    }
+
+    // Add event listener to clear the sale price field when 'Is on Sale' is unchecked
+    isSaleCheckbox.addEventListener('change', function() {
+        if (!isSaleCheckbox.checked) {
+            salePriceField.value = ''; // Clear the sale price when not on sale
+        }
+    });
+</script>
+{% endblock content %}
+
+

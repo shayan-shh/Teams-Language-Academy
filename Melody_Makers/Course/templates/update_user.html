@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{%block content %}
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+  <div class="container">
+      <div class="row">
+
+          <div class="col-lg-10 col-12" dir="rtl">
+              <h1>
+                  <span class=" text-primary"> پروفایل خود را </span>
+                  <span class="text-dark">اینجا میتونی ویرایش کنی </span>
+              </h1>
+          </div>
+      </div>
+  </div>
+</header>
+<section class="vh-100 mt-5" dir="rtl">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form method="post" action="{% url 'update_user' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{user_form.as_p}}
+          <br>
+          <div class="form-group">
+            <label for="id_profile_picture">تصویر پروفایل:</label>
+            {{ profile_form.as_p }}
+          </div>
+          
+
+
+
+         
+
+          <!-- register -->
+          <div class="text-center text-lg-start mt-4 pt-2">
+            
+            <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary flex-shrink-0 m-1"
+              style="padding-left: 2.5rem; padding-right: 2.5rem">ویرایش </button>
+              <a class="btn btn-warning flex-shrink-0  m-1" href="{% url 'update_password' %}">
+                رمز عبور جدید  
+                <i class="bi bi-shield-fill"></i>
+               </a>
+            </div>
+          
+        </form>
+      </div>
+      <div class="col-md-4 col-lg-6 col-xl-3" style="display: flex; align-items: center; justify-items: center;">
+        <!-- {% if user.profile.profile_image %}       -->
+        <img id="profile-pic-preview" src="{{ user.profile.profile_image.url }}" alt="تصویر پروفایل" class="profile-picture mx-5" style="max-width: 600px; max-height: 400px; object-fit: cover;  ">
+        <!-- {% endif %} -->
+      </div>
+
+       
+
+    </div>
+  </div>
+</section>
+<script>
+  // JavaScript to preview the image before submitting the form
+  document.getElementById('id_profile_picture').addEventListener('change', function (event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+          const previewImage = document.getElementById('profile-pic-preview');
+          previewImage.src = reader.result; // Set the preview image source to the selected file
+      };
+      reader.readAsDataURL(event.target.files[0]);
+  });
+</script>
+<!-- <script>
+    document.getElementById('clear-image').addEventListener('click', function () {
+        document.getElementById('id_profile_picture').value = ''; // Reset the file input
+        document.getElementById('profile-pic-preview').src = '{{ user.profile.profile_picture.url }}'; // Reset the preview image to the current profile picture
+    });
+</script> -->
+
+{% endblock %}
+

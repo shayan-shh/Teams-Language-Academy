@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+  <div class="container">
+      <div class="row">
+        <center>
+          <div class="col-lg-10 col-12 " dir="rtl">
+            <h1>
+                <span class=" text-primary"> لیست کاربر های</span>
+                <span class="text-dark">ثبت نام شده</span>
+            </h1>
+        </div>
+        </center>
+      </div>
+  </div>
+</header>
+
+ <section class="" dir="rtl">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-9">
+                <center><h3 class="mb-5">لیست کاربر ها</h3></center>
+                
+                 
+                
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                          <th scope="col"> شناسه کاربر </th>
+                          <th scope="col"> دوره کاربر </th>
+                          <th scope="col">نام  </th>
+                          <th scope="col">نام خانوادگی</th>
+                          <th scope="col">نام کاربری </th>
+                          <th scope="col">ایمیل</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    {% for item in users %}
+                        <tr>
+                          <td>{{ item.id }}</td>
+                          <td><a href="{% url 'users_courses' item.id %}" class="btn btn-outline-warning">  جزئیات</a></td>
+                          <td>{{ item.first_name }}</td>
+                          <td>{{ item.last_name }}</td>
+                          <td>{{ item.username }}</td>
+                          <td>{{ item.email }}</td>
+                        </tr>
+                    {% endfor %}
+                      </tbody>
+                  </table>
+                  <a class="btn btn-outline-dark flex-shrink-0  mt-3" href="{% url 'home' %}">
+                    بازگشت  
+                    <i class="bi bi-arrow-left-circle"></i>
+                   </a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+{% endblock content %}
+
+

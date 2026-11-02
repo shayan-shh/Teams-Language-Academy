@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<!-- Section-->
+
+ <section class=" pt-5" dir="rtl">
+   <div class="container pt-5">
+     <div class="row d-flex justify-content-center align-items-center  pt-5">
+       <div class="col-12">
+         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+           <div class="card-body p-5" >   
+              {% if cart_course %}
+              <div class="row g-0" >
+                <div class="col-lg-8">
+                  <div class="p-5">
+                    <div class="d-flex justify-content-between align-items-center mb-5 ">
+                      
+                      <h1 class="fw-bold mb-0">سبد خرید</h1>
+
+                    </div>
+                    <hr class="my-4">
+                  {% for course in cart_course %}
+                  <div class="row mb-4 d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img
+                        src="{{ course.picture.url }}"
+                        class="img-fluid rounded-3" alt="عکس دوره">
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <h6 class="text-muted"> {{ course.category }}</h6>
+                      <h6 class="mb-0">  {{ course.name }} </h6>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3 offset-lg-1">
+                      {% if course.is_sale %}
+                  <span class="text-decoration-line-through text-secondary"><i class="bi bi-cash-coin ml-4"></i> {{course.price |intcomma}} تومان</span>
+                  <br>
+                  <span class="text-danger"><i class="bi bi-cash-coin ml-4"></i> {{course.sale_price |intcomma}} تومان</span>
+                  {% else %}
+                  <span>{{course.price |intcomma}} تومان</span>
+                  {% endif %}
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-xl-2 ">
+                      <button  type="button" data-index={{course.id}}  class="btn btn-danger course_remove">
+                         حذف
+                    </button>
+                    </div>
+                  </div>
+                  
+                  <hr class="my-4">
+                  {% endfor %}
+  
+                    <div class="pt-5">
+                      <h6 class="mb-0"><a href="{% url 'home' %}" class="text-primary"><i
+                            class="fas fa-long-arrow-alt-left me-2"></i>بازگشت به خانه</a></h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 bg-body-tertiary">
+                  <div class="p-5">
+                    <h3 class="fw-bold mb-5 mt-2 pt-1">سفارش شما</h3>
+                    <hr class="my-4">
+   
+  
+                    <div class="d-flex justify-content-between mb-5">
+                      <h5 class="text-uppercase">جمع سبد خرید</h5>
+                      <h5>{{total  | intcomma}}</h5>
+                    </div>
+  
+                    <a  class="btn btn-outline-success btn-block btn-lg" href="{% url 'checkout' %}">پرداخت</a> 
+  
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div>
+            
+            {% else %}
+              <center><h1>سبد حرید شما خالی است! &#128553</h1></center>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  <script>
+    $(document).on('click', '.course_remove', function(e){
+        e.preventDefault();
+
+  
+        $.ajax({
+            type:'POST',
+            url: "{% url 'cart_delete' %}",
+            data: {
+                course_id: $(this).data('index'),
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                action: 'post',
+            },
+
+            success: function(json){
+                location.reload();
+           
+            },
+            
+        })
+    })
+</script>
+{% endblock content %}
+
+

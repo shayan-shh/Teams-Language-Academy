@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+
+<header class="site-header section-padding d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row">
+
+            <center>
+                <div class="col-lg-10 col-12" dir="rtl">
+                    <h1>
+                        <span class="text-dark">اینجا میتونی   </span>
+                        <span class=" text-primary">   پرداخت کنی</span>
+                    </h1>
+                </div>
+            </center>
+        </div>
+    </div>
+</header>
+ <section class="py-5" dir="rtl">
+    <div class="container ">
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-6">
+         
+                <div class="card">
+                    <div class="card-header">
+                    مرور خرید شما
+                    </div>
+                    <div class="card-body">
+                    {% for course in cart_course %}
+                        {{course.name}}
+                        {% if course.is_sale %}
+                            {{course.sale_price | intcomma}}
+
+                        {% else %}
+                            {{course.price | intcomma}}
+                        {% endif %}
+                        <br><br>
+                        {% endfor %}
+                        <h5>جمع خرید: {{total | intcomma}}</h3>
+                        <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark mt-3">بازگشت به سبد خرید</a>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                      اطلاعات بانکی
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{% url 'process_order' %}">
+                            {% csrf_token %}
+                            {{billing_form.as_p}}
+                            <button type="submit" class="btn btn-success mt-3">پرداخت</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+{% endblock content %}
+
+
